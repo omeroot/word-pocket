@@ -1,18 +1,15 @@
 package com.yazlab.dao;
 
-
+import com.yazlab.dto.TextDTO;
 import com.yazlab.serialize.TextSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 @Repository
 public class TextDAO {
@@ -20,21 +17,15 @@ public class TextDAO {
     @Autowired
     TextSer textSer;
 
-    public List<String> getWords(String token) {
-        List<String> gg = null;
+    public TextSer getWords(String token) {
+        List<String> gg = new ArrayList<String>();
         Integer counter = 0;
 
         try {
-            FileInputStream fileIn = new FileInputStream("db/" + token + ".ser");
+            FileInputStream fileIn = new FileInputStream("db/" + token.toString() + ".ser");
             ObjectInputStream objIn = new ObjectInputStream(fileIn);
-            textSer = (TextSer) objIn.readObject();
 
-            for (Map.Entry<String, Integer> entry : textSer.getWordList().entrySet()) {
-                if (counter == 5)
-                    break;
-                gg.add(entry.getKey());
-                counter++;
-            }
+            textSer = (TextSer) objIn.readObject();
 
             objIn.close();
             fileIn.close();
@@ -46,6 +37,25 @@ public class TextDAO {
             e.printStackTrace();
         }
 
-        return gg;
+        return textSer;
+    }
+
+    public void setWords(String token, Map<String, Integer> wordsMap) {
+
+        FileOutputStream fs = null;
+        try {
+            fs = new FileOutputStream("db/" + token.toString() + ".ser");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fs);
+
+            TextSer s = new TextSer();
+            s.setWordList(wordsMap);
+
+            objectOutputStream.writeObject(s);
+            objectOutputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

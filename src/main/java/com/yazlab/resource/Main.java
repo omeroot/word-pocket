@@ -1,6 +1,5 @@
 package com.yazlab.resource;
 
-
 import com.yazlab.dto.TextDTO;
 import com.yazlab.dto.TokenDTO;
 import com.yazlab.service.MainService;
@@ -8,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -23,8 +25,9 @@ public class Main {
     MainService mainService;
 
     @POST
-    @Path("frequency")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("myfrequency")
+    @Consumes("application/json")
+    @Produces("application/json")
     public Response getFrequency(TokenDTO tokenDTO){
         return Response.ok(mainService.getWords(tokenDTO)).build();
     }

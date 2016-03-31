@@ -1,13 +1,18 @@
 package com.yazlab.dto;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.springframework.stereotype.Component;
+
+@Component
 public class TokenDTO {
-    private String userToken;
+    @JsonProperty("userId")
+    private String userId;
 
     public String getUserToken() {
-        return userToken;
+        return userId;
     }
 
-    public void setUserToken(String userToken) {
-        this.userToken = userToken;
+    public void setUserToken(String userId) {
+        this.userId = userId;
     }
 }

@@ -4,24 +4,36 @@
     <display-name>Java RESTful Service</display-name>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:META-INF/spring-master.xml</param-value>
+        <param-value>classpath:META-INF/applicationContext.xml</param-value>
     </context-param>
+
     <listener>
-        <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
     </listener>
-    <listener>
-        <listener-class>org.jboss.resteasy.plugins.spring.SpringContextLoaderListener</listener-class>
-    </listener>
+
     <servlet>
-        <servlet-name>Resteasy</servlet-name>
-        <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+        <servlet-name>jersey-servlet</servlet-name>
+        <servlet-class>
+            com.sun.jersey.spi.spring.container.servlet.SpringServlet
+        </servlet-class>
+        <init-param>
+            <param-name>
+                com.sun.jersey.config.property.packages
+            </param-name>
+            <param-value>com.yazlab</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
     </servlet>
+
     <servlet-mapping>
-        <servlet-name>Resteasy</servlet-name>
+        <servlet-name>jersey-servlet</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
-    <context-param>
-        <param-name>resteasy.servlet.mapping.prefix</param-name>
-        <param-value>/</param-value>
-    </context-param>
+
 </web-app>

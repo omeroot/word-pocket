@@ -1,9 +1,14 @@
 package com.yazlab.dto;
 
+import org.springframework.stereotype.Component;
 
-public class TextDTO {
+public class TextDTO{
     private String userId;
     private String sentence;
+
+    public TextDTO(){
+
+    }
 
     public String getUserId() {
         return userId;

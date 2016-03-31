@@ -1,13 +1,15 @@
 package com.yazlab.serialize;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Map;
 
 @Component
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class TextSer implements Serializable{
-    private static final long serialVersionUID = 7526472295622776147L;
     private String userId;
     private Map<String, Integer> wordList;
 

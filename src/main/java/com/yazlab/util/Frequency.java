@@ -1,7 +1,9 @@
 package com.yazlab.util;
 
-/**
- * Created by markakoddevelopment on 23/03/16.
- */
+
+import org.springframework.stereotype.Component;
+
+@Component
 public class Frequency {
+
 }

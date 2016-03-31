@@ -1,10 +1,14 @@
 package com.yazlab.dto;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class ResponseDTO {
     private Boolean Err;
     private String Msg;
@@ -13,7 +17,7 @@ public class ResponseDTO {
     public ResponseDTO(){
         this.Msg = "";
         this.Err = false;
-        this.words = null;
+        this.words = new ArrayList<>();
     }
 
     public Boolean getErr() {

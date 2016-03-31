@@ -38,7 +38,6 @@ public class MainService {
     public ResponseDTO getWords(TokenDTO tokenDTO) {
         String token = tokenDTO.getUserToken();
         Map<String, Integer> wordMap = textDAO.getWords(token);
-        List<String> gg = new ArrayList<String>();
         List<String> piece = new ArrayList<>();
 
         Set<Map.Entry<String, Integer>> set = wordMap.entrySet();

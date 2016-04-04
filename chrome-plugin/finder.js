@@ -13,7 +13,7 @@ function findANDHighlight(words) {
 
         if (!(new RegExp('\\b' + ex.join('\\b|\\b') + '\\b') ).test(word)) {
             last = last.replace(new RegExp(word, 'gi'), function (match) {
-                var el = "<span class='highlight-yazlab-I'>" + match + "</span>"
+                var el = "<mark>" + match + "</mark>";
                 return el;
             });
         }

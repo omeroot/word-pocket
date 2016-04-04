@@ -1,0 +1,22 @@
+{
+  "name": "Spell",
+  "description": "word frequency extension for yazlab 1 project",
+  "version": "1.0",
+  "permissions": ["contextMenus","tabs","storage", "http://*/*", "https://*/*"],
+  "background": {
+    "scripts": ["js/jquery-1.12.1.min.js","background.js","app.js"]
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+        {
+          "css": ["css/main.css"],
+        	"matches": ["http://*/*", "https://*/*"],
+          "js": ["finder.js","main.js"]
+        }
+  ],
+  "manifest_version": 2
+}

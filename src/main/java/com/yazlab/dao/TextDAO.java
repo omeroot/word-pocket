@@ -30,7 +30,12 @@ public class TextDAO {
 
             objIn.close();
             fileIn.close();
-        } catch (Exception e) {
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return new HashMap<String,Integer>();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

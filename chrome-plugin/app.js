@@ -6,7 +6,7 @@ function spellIt(text) {
     };
 
     $.ajax({
-        url: "http://localhost:8080/Yazlab/frequency",
+        url: "http://localhost:8080/frequency",
         type: "POST",
         dataType: "json",
         async: false,
@@ -35,7 +35,7 @@ function gWords() {
     };
 
     $.ajax({
-        url: "http://localhost:8080/Yazlab/myfrequency",
+        url: "http://localhost:8080/myfrequency",
         type: "POST",
         dataType: "json",
         async: false,

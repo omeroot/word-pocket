@@ -1,12 +1,6 @@
 var _USERID;
-var _WORDS = ["tell", "google", "link", "class", "hello", "element"];
+var _WORDS = [];
 
-findANDHighlight(_WORDS);
-
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    if (request.action === "register") {
-        _USERID = request.myId;
-    } else if (request.action === "update") {
-        _WORDS = request.words;
-    }
+chrome.runtime.sendMessage(JSON.stringify({action: "get"}), function (response) {
+  findANDHighlight(response.words);
 });

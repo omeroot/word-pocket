@@ -13,6 +13,7 @@ function findANDHighlight(words) {
 
         if (!(new RegExp('\\b' + ex.join('\\b|\\b') + '\\b') ).test(word)) {
             last = last.replace(new RegExp(word, 'gi'), function (match) {
+                console.log("match", match);
                 var el = "<mark>" + match + "</mark>";
                 return el;
             });

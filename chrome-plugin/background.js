@@ -13,6 +13,10 @@ function getRandomToken() {
 }
 
 chrome.runtime.onInstalled.addListener(function () {
+
+  chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    sendResponse({action: "update", words: gWords().data});
+  });
     chrome.storage.sync.get("userId", function (items) {
         var userId = items.userId;
 
@@ -24,11 +28,7 @@ chrome.runtime.onInstalled.addListener(function () {
             });
         } else {
             USERID = userId;
-            chrome.runtime.sendMessage({action: "update", words: gWords().data}, function (reponse) {
-            });
         }
-        chrome.runtime.sendMessage({action: "register", myId: USERID}, function (response) {
-        });
     });
 
     var selectCopy = chrome.contextMenus.create({
@@ -39,12 +39,6 @@ chrome.runtime.onInstalled.addListener(function () {
 
             if (response.err) {
                 alert(response.msg);
-            } else {
-                var myWords = gWords();
-                if (!myWords.err) {
-                    chrome.runtime.sendMessage({action: "update", words: myWords.data}, function (response) {
-                    });
-                }
             }
         }
     });

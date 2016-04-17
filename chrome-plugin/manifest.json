@@ -15,7 +15,7 @@
         {
           "css": ["css/main.css"],
         	"matches": ["http://*/*", "https://*/*"],
-          "js": ["finder.js","main.js"]
+          "js": ["js/jquery-1.12.1.min.js","finder.js","main.js"]
         }
   ],
   "manifest_version": 2

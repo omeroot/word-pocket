@@ -7,6 +7,7 @@ import com.yazlab.dto.TokenDTO;
 import com.yazlab.serialize.TextSer;
 import com.yazlab.util.Filter;
 import com.yazlab.util.Spell;
+import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.TokenStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.*;
 
 @Service
 public class MainService {
+    private static final Logger logger = Logger.getLogger(MainService.class);
 
     @Autowired
     TextDAO textDAO;
@@ -40,6 +42,8 @@ public class MainService {
         Map<String, Integer> wordMap = textDAO.getWords(token);
         List<String> piece = new ArrayList<>();
 
+        logger.info("[" + token + "] [STORED WORDS] " + wordMap);
+
         Set<Map.Entry<String, Integer>> set = wordMap.entrySet();
         List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(set);
         Collections.sort( list, new Comparator<Map.Entry<String, Integer>>()
@@ -51,13 +55,13 @@ public class MainService {
             }
         } );
 
-        for(int i = 0; i< 5; i++){
+        for(int i = 0; i< list.size(); i++){
             String p = String.valueOf(list.get(i).getKey());
             piece.add(p);
+            if(i == 4) break;
         }
 
-
-
+        logger.info("[" + token + "] [SORTED WORDS]" + piece);
         responseDTO.setErr(false);
         responseDTO.setWords(piece);
 
